@@ -1,0 +1,22 @@
+{
+  "name": "meta-id-client",
+  "version": "1.0.0",
+  "description": "Cliente do projeto Meta ID",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackultura/meta-id-client.git"
+  },
+  "author": "Hackultura",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/hackultura/meta-id-client/issues"
+  },
+  "homepage": "https://github.com/hackultura/meta-id-client#readme",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  }
+}

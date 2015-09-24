@@ -28,7 +28,7 @@ var paths = {
 		less: {
 			root: "src/public/build/less/",
 			skins: "src/public/build/less/skins/*.less",
-			all: ["src/public/build/less/AdminLTE.less", "src/public/build/less/skins/skin-blue.less"]
+			all: ["src/public/build/less/AdminLTE.less", "src/public/build/less/skins/skin-green-light.less"]
 		},
 		js: {
 			app: "src/public/build/js/app.js",
@@ -37,6 +37,9 @@ var paths = {
 		img: {
 			root: "./src/public/build/img",
 			images: "./src/public/build/img/**/*",
+		},
+		fonts: {
+			ionicons: "./src/public/vendors/Ionicons/fonts/**/*"
 		}
 	},
 	dist: {
@@ -48,7 +51,8 @@ var paths = {
 		public: {
 			css: './src/public/dist/css',
 			js: './src/public/dist/js',
-			img: './src/public/dist/img'
+			img: './src/public/dist/img',
+			fonts: './src/public/dist/fonts'
 		}
 	}
 };
@@ -73,6 +77,11 @@ gulp.task('usemin', ['less', 'uglify:layout'], function () {
       .pipe(gulp.dest(paths.dist.root));
 });
 
+gulp.task('usemin:fonts', function() {
+	return gulp.src(paths.public.fonts.ionicons)
+		.pipe(gulp.dest(paths.dist.public.fonts));
+});
+
 gulp.task('imagemin', function() {
     return gulp.src(paths.public.img.images)
     .pipe(imagemin({ progressive: true }))
@@ -82,13 +91,13 @@ gulp.task('imagemin', function() {
 gulp.task('html', function () {
   return gulp.src(paths.app.html)
 	.pipe(templateCache({
-		module: 'tomotaskApp'
+		module: 'metaIdApp'
 	}))
     .pipe(gulp.dest(paths.dist.app.html));
 });
 
 gulp.task('watch', function () {
-  gulp.watch([paths.app.js, paths.public.html, paths.public.less.all], ['clean', 'less', 'usemin', 'imagemin', 'html']);
+  gulp.watch([paths.app.js, paths.app.html, paths.public.html, paths.public.less.all], ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html']);
 });
 
 gulp.task('less', function () {
@@ -127,6 +136,6 @@ gulp.task('webserver', function() {
     .pipe(webserver());
 });
 
-gulp.task('build', ['clean', 'less', 'usemin', 'imagemin', 'html']);
+gulp.task('build', ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html']);
 
 gulp.task('default', ['build']);

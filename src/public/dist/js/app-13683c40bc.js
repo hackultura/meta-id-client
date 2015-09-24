@@ -1,1 +1,0 @@
-!function(){"use strict";function e(e){e.when("/",{templateUrl:"dashboard/dashboard.html"}).otherwise({redirectTo:"/"})}angular.module("metaIdApp",["ngRoute"]).config(e),e.$inject=["$routeProvider"]}();

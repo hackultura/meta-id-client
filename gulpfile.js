@@ -24,7 +24,9 @@ var paths = {
 		html: './src/app/**/*.html'
 	},
 	public: {
-		html: "./src/public/index.html",
+		index: "./src/public/index.html",
+		html: "./src/public/*.html",
+		pages: "./src/public/pages/**/*.html",
 		less: {
 			root: "src/public/build/less/",
 			skins: "src/public/build/less/skins/*.less",
@@ -49,6 +51,7 @@ var paths = {
 			html: './src/public/dist/app/html',
 		},
 		public: {
+			pages: "./src/public/dist/pages",
 			css: './src/public/dist/css',
 			js: './src/public/dist/js',
 			img: './src/public/dist/img',
@@ -96,8 +99,13 @@ gulp.task('html', function () {
     .pipe(gulp.dest(paths.dist.app.html));
 });
 
+gulp.task('html:pages', function() {
+	return gulp.src(paths.public.pages)
+		.pipe(gulp.dest(paths.dist.public.pages));
+});
+
 gulp.task('watch', function () {
-  gulp.watch([paths.app.js, paths.app.html, paths.public.html, paths.public.less.all], ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html']);
+  gulp.watch([paths.app.js, paths.app.html, paths.public.html, paths.public.pages, paths.public.index, paths.public.less.all], ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html', 'html:pages']);
 });
 
 gulp.task('less', function () {
@@ -136,6 +144,6 @@ gulp.task('webserver', function() {
     .pipe(webserver());
 });
 
-gulp.task('build', ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html']);
+gulp.task('build', ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html', 'html:pages']);
 
 gulp.task('default', ['build']);

@@ -1,1 +1,159 @@
-<h1>Cadastro de Ente</h1>
+<div class="register-box" data-ng-controller="EnteController as vm">
+	<div class="register-logo">
+		<a href="#"><b>ID</b> Cultural</a>
+		<p class="description-header">Bem vindo ao sistema de <strong>Identidade Cultural</strong> da Secretaria de Cultura do Distrito Federal. Você acabou de efetuar o seu login, e vemos que é a primeira vez que entra aqui. Então por favor, preencha algumas das informações baixo para que possamos criar o seu <strong>painel artístico</strong>.</p>
+	</div>
+
+	<div class="process">
+		<div class="process-row">
+			<div class="process-step">
+				<button type="button"
+					data-ng-class="vm.basicStep ? 'btn btn-success btn-circle': 'btn btn-default btn-circle'"
+					disabled="disabled"><i class="fa fa-user fa-2x"></i></button>
+				<p data-ng-class="{'process-active': vm.basicStep}">Dados Gerais</p>
+			</div>
+			<div class="process-step">
+				<button type="button"
+					data-ng-class="vm.artisticStep ? 'btn btn-success btn-circle': 'btn btn-default btn-circle'"
+					disabled="disabled"><i class="fa fa-music fa-2x"></i></button>
+				<p data-ng-class="{'process-active': vm.artisticStep}">Dados Artísticos</p>
+			</div> 
+		</div>
+	</div>
+	<div class="register-box-body" data-ng-show="vm.basicStep">
+		<form action="../../index.html" method="post">
+			<div class="form-group has-feedback">
+				<input type="text" class="form-control" placeholder="Nome Completo">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="text" class="form-control" placeholder="Endereço">
+				<span class="glyphicon glyphicon-home form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="form-group has-feedback">
+							<input type="text" class="form-control" placeholder="Bairro">
+							<span class="fa fa-flag form-control-feedback"></span>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<div class="form-group has-feedback">
+							<input type="text" class="form-control" placeholder="Cidade">
+							<span class="fa fa-flag form-control-feedback"></span>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<div class="form-group has-feedback">
+							<input type="text" class="form-control" placeholder="Estado">
+							<span class="fa fa-flag form-control-feedback"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="email" class="form-control" placeholder="E-mail">
+				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="form-group has-feedback">
+							<input type="text" class="form-control" placeholder="CPF">
+							<span class="glyphicon glyphicon-modal-window form-control-feedback"></span>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<div class="form-group has-feedback">
+							<input type="text" class="form-control" placeholder="Data de Nascimento">
+							<span class="glyphicon glyphicon-gift form-control-feedback"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 right">
+					<a href class="btn btn-primary btn-block btn-flat" data-ng-click="vm.goEnteArtisticForm()">Próximo</a>
+				</div>
+			</div>
+		</form>
+		<!--
+		-->
+	</div>
+
+	<div class="register-box-body" data-ng-show="vm.artisticStep">
+		<form action="../../index.html" method="post">
+			<div class="form-group has-feedback">
+				<input type="text" class="form-control" placeholder="Nome Artístico">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label">Atuação Cultural</label>
+							<select class="form-control">
+								<option>Selecione</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label">Área Artística</label>
+							<select class="form-control">
+								<option>Selecione</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label">Estilo Artístico</label>
+							<select class="form-control">
+								<option>Selecione</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label">Tempo de Experiência</label>
+							<select class="form-control">
+								<option>Selecione</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 right">
+					<a href class="btn btn-primary btn-block btn-flat">Finalizar</a>
+				</div>
+				<div class="col-xs-4 right">
+					<a href class="btn btn-primary btn-block btn-flat" data-ng-click="vm.goEnteBasicForm()">Voltar</a>
+				</div>
+			</div>
+		</form>
+		<!--
+		-->
+	</div>
+</div><!-- /.register-box -->

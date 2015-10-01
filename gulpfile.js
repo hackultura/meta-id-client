@@ -41,7 +41,8 @@ var paths = {
 			images: "./src/public/build/img/**/*",
 		},
 		fonts: {
-			ionicons: "./src/public/vendors/Ionicons/fonts/**/*"
+			ionicons: "./src/public/vendors/Ionicons/fonts/**/*",
+			bootstrap: "./src/public/vendors/bootstrap/fonts/**/*"
 		}
 	},
 	dist: {
@@ -81,7 +82,7 @@ gulp.task('usemin', ['less', 'uglify:layout'], function () {
 });
 
 gulp.task('usemin:fonts', function() {
-	return gulp.src(paths.public.fonts.ionicons)
+	return gulp.src([paths.public.fonts.ionicons, paths.public.fonts.bootstrap])
 		.pipe(gulp.dest(paths.dist.public.fonts));
 });
 

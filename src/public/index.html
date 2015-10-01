@@ -48,9 +48,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="{{ pageClasses }}">
 
-	<div class="hold-transition skin-green-light sidebar-mini" data-ui-view></div>
+	<div data-ui-view></div>
 
     <!-- build:layout_js js/layout.js -->
     <!-- jQuery 2.1.4 -->
@@ -111,6 +111,8 @@
     <!-- build:app app/app.js -->
     <!-- Angular App -->
     <script src="../app/app.module.js"></script>
+    <script src="../app/dashboard/dashboard.controller.js"></script>
+    <script src="../app/ente/ente.controller.js"></script>
     <!-- endbuild -->
     <script src="app/html/templates.js"></script>
 

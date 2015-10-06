@@ -61,6 +61,24 @@
 						templateUrl: 'dashboard/dashboard.html'
 					}
 				}
+			})
+			.state('documentations_general', {
+				parent: 'admin',
+				url: "/documentacoes/geral",
+				views: {
+					'content@admin': {
+						templateUrl: 'documentations/documentations_general.html'
+					}
+				}
+			})
+			.state('documentations_artistic', {
+				parent: 'admin',
+				url: "/documentacoes/artistico",
+				views: {
+					'content@admin': {
+						templateUrl: 'documentations/documentations_artistic.html'
+					}
+				}
 			});
 	}
 

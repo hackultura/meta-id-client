@@ -59,13 +59,17 @@
     <script src="vendors/jquery-ui/jquery-ui.min.js"></script>
     <!-- Morris.js charts -->
     <script src="vendors/raphael/raphael-min.js"></script>
+    <!-- Input Mask -->
+    <script src="vendors/jquery.inputmask/dist/inputmask/inputmask.js"></script>
+    <script src="vendors/jquery.inputmask/dist/inputmask/jquery.inputmask.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- endbuild -->
+	<!-- endbuild -->
+
 
     <!-- build:lib js/lib.js -->
     <script src="vendors/morris.js/morris.min.js"></script>
@@ -96,6 +100,11 @@
     <script src="dist/js/all.min.js"></script>
     <!-- endbuild -->
 
+    <!-- build:layout_config js/layout_config.js -->
+	<!-- Configurations of interface -->
+    <script src="build/js/configs.js"></script>
+    <!-- endbuild -->
+
 
     <!-- build:app_lib js/app_lib.js -->
     <!-- Angular -->
@@ -114,6 +123,7 @@
     <script src="../app/dashboard/dashboard.controller.js"></script>
     <script src="../app/ente/ente.controller.js"></script>
     <!-- endbuild -->
+
     <script src="app/html/templates.js"></script>
 
   </body>

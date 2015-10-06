@@ -75,6 +75,7 @@ gulp.task('usemin', ['less', 'uglify:layout'], function () {
         layout_css: [minifyCSS(), 'concat', rev()],
         vendor_css: [minifyCSS(), 'concat', rev()],
         layout_js: [uglify(), rev()],
+        layout_config: [uglify(), rev()],
         lib: [uglify(), rev()],
         app: [uglify(), rev()]
       }))

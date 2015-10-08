@@ -77,8 +77,37 @@
   .widget-profile-name {
     margin-top: 5px;
     margin-bottom: 5px;
+	margin-left: 115px;
     font-size: 70px;
     font-weight: 300;
+  }
+
+  //Profile image container
+  .widget-profile-image {
+    position: absolute;
+    top: 11px;
+    left: 2%;
+    > img {
+	  margin-top: 10px;
+      width: 96px;
+      height: 96px;
+      border: 3px solid #fff;
+    }
+
+	> img:hover {
+		opacity: 0.6;
+		filter: alpha(opacity=60);
+		cursor: pointer;
+	}
+  }
+
+  .widget-profile-header {
+    padding: 20px;
+    .border-top-radius(@box-border-radius);
+	.row {
+		margin-top: 18px;
+		margin-left: -25px;
+	}
   }
 
   //User single line description

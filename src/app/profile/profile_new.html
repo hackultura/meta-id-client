@@ -20,11 +20,15 @@
 				<div class="box box-widget widget-user-2">
 					<!-- Add the bg color to the header using any of the bg-* classes -->
 					<div class="widget-user-header">
-						<div class="widget-user-image">
-							<img class="img-circle" src="img/user2-160x160.jpg" alt="User Avatar">
+						<div class="widget-profile-image">
+							<div data-ngf-drop data-ngf-select data-ng-model="vm.profile.avatar" class="drop-box avatar circle"
+								data-ngf-drag-over-class="dragover" data-ngf-multiple="false" data-ngf-allow-dir="false"
+								accept="image/*" data-ngf-pattern="'image/*'" data-ng-hide="vm.profile.avatar">Foto do Perfil</div>
+							<img class="img-circle" data-ngf-select data-ng-model="vm.profile.avatar" data-ngf-src="vm.profile.avatar" alt="Imagem de Perfil">
+							<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
 						</div><!-- /.widget-user-image -->
 						<h3 class="widget-profile-name"><a href="#" data-editable-text="vm.profile.name">{{ vm.profile.name || "Nome do seu perfil" }}</a></h3>
-						<div class="widget-user-header">
+						<div class="widget-profile-header">
 							<div class="row">
 								<div class="col-md-6">
 									<strong>Atividade Cultural:</strong>
@@ -99,6 +103,20 @@
 							</div>
 							<div class="timeline-footer">
 							</div>
+						</div>
+					</li>
+					<li>
+						<i class="fa fa-file bg-green"></i>
+						<div class="timeline-item">
+							<h3 class="timeline-header">Inserir Arquivo</h3>
+							<div class="timeline-body"></div>
+						</div>
+					</li>
+					<li>
+						<i class="fa fa-image bg-blue"></i>
+						<div class="timeline-item">
+							<h3 class="timeline-header">Inserir Imagem</h3>
+							<div class="timeline-body"></div>
 						</div>
 					</li>
 				</ul>

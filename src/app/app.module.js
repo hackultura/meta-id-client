@@ -4,7 +4,8 @@
 	angular
 		.module('metaIdApp', [
 			'ui.router',
-			'xeditable'
+			'xeditable',
+			'ngFileUpload'
 		])
 		.config(routeConfig)
 		.run(runConfig);

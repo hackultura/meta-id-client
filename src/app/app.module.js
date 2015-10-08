@@ -2,12 +2,15 @@
 	'use strict';
 
 	angular
-		.module('metaIdApp', ['ui.router'])
+		.module('metaIdApp', [
+			'ui.router',
+			'xeditable'
+		])
 		.config(routeConfig)
 		.run(runConfig);
 
 	routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
-	runConfig.$inject = ['$rootScope'];
+	runConfig.$inject = ['$rootScope', 'editableOptions'];
 
 	function routeConfig($stateProvider, $urlRouterProvider) {
 		// Definindo a rota padrão
@@ -79,14 +82,35 @@
 						templateUrl: 'documentations/documentations_artistic.html'
 					}
 				}
+			})
+			.state('profile_new', {
+				parent: 'admin',
+				url: "/perfil/novo",
+				views: {
+					'content@admin': {
+						templateUrl: 'profile/profile_new.html'
+					}
+				}
+			})
+			.state('profile_detail', {
+				parent: 'admin',
+				url: "/perfil/:slug",
+				views: {
+					'content@admin': {
+						templateUrl: 'profile/profile_detail.html'
+					}
+				}
 			});
 	}
 
 	// Efetuando configuracoes ao iniciar o objeto do Angular.
-	function runConfig($rootScope) {
-		console.log("Entrou no run");
+	function runConfig($rootScope, editableOptions) {
+		// Passando as classes que estilizam os templates escolhidos durante o roteamento
 		$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 			$rootScope.pageClasses = toState.data.pageClasses;
 		});
+
+		// Definindo o tema do xeditable
+	editableOptions.theme = 'bs3';
 	}
 })();

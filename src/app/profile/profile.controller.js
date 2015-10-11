@@ -16,6 +16,7 @@
 		vm.cultural_areas = [];
 		vm.cultural_styles = [];
 		vm.experience_artistics = [];
+		vm.activeForm = '';
 
 		// Functions
 		vm.init = init;
@@ -23,6 +24,7 @@
 		vm.loadCulturalAreas = loadCulturalAreas;
 		vm.loadCulturalStyles = loadCulturalStyles;
 		vm.loadExperienceArtistics = loadExperienceArtistics;
+		vm.removeImageForm = removeImageForm();
 
 
 		function init() {
@@ -54,7 +56,6 @@
 				}
 			});
 		}
-
 
 		function loadCulturalActivities() {
 			// TODO: Invocar do servidor
@@ -216,6 +217,12 @@
 					"experience_text": "6 Anos"
 				}
 			];
+		}
+
+		function removeImageForm() {
+			if(vm.profile.content !== undefined) {
+				vm.profile.content.image = null;
+			}
 		}
 	}
 })();

@@ -1,0 +1,32 @@
+.arrow_box {
+	position: relative;
+	background: #00A65A;
+	border: 2px solid #00A65A;
+}
+.arrow_box:after, .arrow_box:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(0, 166, 90, 0);
+	border-top-color: #00A65A;
+	border-width: 25px;
+	margin-left: -25px;
+}
+.arrow_box:before {
+	border-color: rgba(0, 166, 90, 0);
+	border-top-color: #00A65A;
+	border-width: 28px;
+	margin-left: -28px;
+}
+
+.arrow_box:hover {
+	background-color: rgba(0,166,90,.75);
+}

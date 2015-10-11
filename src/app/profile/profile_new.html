@@ -27,21 +27,21 @@
 							<img class="img-circle" data-ngf-select data-ng-model="vm.profile.avatar" data-ngf-src="vm.profile.avatar" alt="Imagem de Perfil">
 							<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
 						</div><!-- /.widget-user-image -->
-						<h3 class="widget-profile-name"><a href="#" data-editable-text="vm.profile.name">{{ vm.profile.name || "Nome do seu perfil" }}</a></h3>
+						<h3 class="widget-profile-name"><a href="#" data-editable-text="vm.profile.name">{{ vm.profile.name || "Digite nome do seu perfil" }}</a></h3>
 						<div class="widget-profile-header">
 							<div class="row">
 								<div class="col-md-6">
 									<strong>Atividade Cultural:</strong>
 									<p><a href="#" data-editable-select="vm.profile.cultural_activity"
 											onshow="vm.loadCulturalActivities()" data-e-ng-options="g.id as g.activity for g in vm.cultural_activities">
-											{{ vm.profile.culturalActivityName || "Sua Atividade Cultural" }}
+											{{ vm.profile.culturalActivityName || "Selecione sua Atividade Cultural" }}
 									</a></p>
 								</div>
 								<div class="col-md-5">
 									<strong>Área Artística:</strong>
 									<p><a href="#" data-editable-select="vm.profile.cultural_area"
 											onshow="vm.loadCulturalAreas()" data-e-ng-options="g.id as g.area for g in vm.cultural_areas">
-											{{ vm.profile.culturalAreaName || "Sua Área Artística" }}
+											{{ vm.profile.culturalAreaName || "Selecione sua Área Artística" }}
 									</a></p>
 								</div>
 							</div>
@@ -50,14 +50,14 @@
 									<strong>Estilo Artístico:</strong>
 									<p><a href="#" data-editable-select="vm.profile.cultural_style"
 											onshow="vm.loadCulturalStyles()" data-e-ng-options="g.id as g.style for g in vm.cultural_styles">
-											{{ vm.profile.culturalStyleName || "Seu Estilo Artístico" }}
+											{{ vm.profile.culturalStyleName || "Selecione seu Estilo Artístico" }}
 									</a></p>
 								</div>
 								<div class="col-md-4">
 									<strong>Tempo de Experiência: </strong>
 									<p><a href="#" data-editable-select="vm.profile.experience_artistic"
 											onshow="vm.loadExperienceArtistics()" data-e-ng-options="g.experience as g.experience_text for g in vm.experience_artistics">
-											{{ vm.profile.experienceArtisticName || "Seu Tempo de Experiência" }}
+											{{ vm.profile.experienceArtisticName || "Selecione seu Tempo de Experiência" }}
 									</a></p>
 								</div>
 							</div>
@@ -66,7 +66,7 @@
 									<strong>Breve Histórico: </strong>
 									<p>
 										<a href="#" data-editable-textarea="vm.profile.history" data-e-rows="7" data-e-cols="60">
-											<pre class="textarea">{{ vm.profile.history || "Seu breve histórico" }}</pre>
+											<pre class="textarea">{{ vm.profile.history || "Escreva o seu histórico" }}</pre>
 										</a>
 									</p>
 								</div>
@@ -85,22 +85,102 @@
 						<div class="timeline-item">
 							<h3 class="timeline-header">Você deseja adicionar que tipo de informação?</a></h3>
 							<div class="timeline-body timeline-options">
-								<a class="btn btn-app">
+								<a class="btn btn-app" data-ng-click="vm.activeForm = 'file'" data-ng-class="{arrow_box: vm.activeForm == 'file'}">
 									<i class="fa fa-file"></i> Arquivo
 								</a>
-								<a class="btn btn-app">
+								<a class="btn btn-app" data-ng-click="vm.activeForm = 'picture'" data-ng-class="{arrow_box: vm.activeForm == 'picture'}">
 									<i class="fa fa-image"></i> Imagem
 								</a>
-								<a class="btn btn-app">
+								<a class="btn btn-app" data-ng-click="vm.activeForm = 'album'" data-ng-class="{arrow_box: vm.activeForm == 'album'}">
 									<i class="fa fa-th-large"></i> Álbum
 								</a>
-								<a class="btn btn-app">
+								<a class="btn btn-app" data-ng-click="vm.activeForm = 'audio'" data-ng-class="{arrow_box: vm.activeForm == 'audio'}">
 									<i class="fa fa-music"></i> Áudio
 								</a>
-								<a class="btn btn-app">
+								<a class="btn btn-app" data-ng-click="vm.activeForm = 'video'" data-ng-class="{arrow_box: vm.activeForm == 'video'}">
 									<i class="fa fa-camera"></i> Vídeo
 								</a>
 							</div>
+							<!-- file form -->
+							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'file'">
+								<div class="panel-body">
+									<h3>Novo Arquivo</h3>
+									<form role="form">
+										<div class="box-body">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-xs-5">
+														<label for="filename">Nome do Arquivo</label>
+														<input type="text" class="form-control" id="filename" placeholder="Nome do Arquivo">
+													</div>
+													<div class="col-xs-5">
+														<label for="exampleInputName2">Tipo de Documento</label>
+														<select class="form-control">
+															<option>Documento de Identificação (CNH / CI / RG)</option>
+															<option>Carteira de Habilitação</option>
+															<option>Certidão de Nascimento</option>
+														</select>
+													</div>
+													<div class="col-xs-2">
+														<label>Vence em:</label>
+														<div class="input-group">
+															<div class="input-group-addon">
+																<i class="fa fa-calendar"></i>
+															</div>
+															<input type="text" class="form-control" data-inputmask="'mask': '99/99/9999'">
+														</div><!-- /.input group -->
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div data-ngf-drop data-ngf-select data-ng-model="vm.profile.content.files" class="drop-box"
+													data-ngf-drag-over-class="dragover" data-ngf-multiple="false" data-ngf-allow-dir="false"
+													accept="*/*" data-ngf-pattern="'*/*'" data-ng-hide="vm.profile.avatar">Arraste o arquivo ou clique aqui para escolher</div>
+												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
+											</div>
+										</div><!-- /.box-body -->
+
+										<div class="box-footer">
+											<a class="btn btn-primary" href="#">Inserir documento</a>
+										</div>
+									</form>
+								</div>
+							</div> <!-- /file form -->
+
+							<!-- picture form -->
+							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'picture'">
+								<div class="panel-body">
+									<h3>Nova Imagem</h3>
+									<form role="form">
+										<div class="box-body">
+											<div class="form-group">
+												<div class="preview">
+													<img data-ngf-src="vm.profile.content.image" alt="Visualização da Imagem" class="image-preview">
+													<a class="btn btn-danger" href="#"
+														data-ng-show="vm.profile.content.image"
+														data-ng-click="vm.removeImageForm()">Remover imagem</a>
+												</div>
+												<div data-ngf-drop data-ngf-select data-ng-model="vm.profile.content.image" class="drop-box"
+													data-ngf-drag-over-class="dragover" data-ngf-multiple="false" data-ngf-allow-dir="false"
+													accept="image/*" data-ngf-pattern="'image/*'" data-ng-hide="vm.profile.avatar">Arraste a imagem ou clique aqui para escolher</div>
+												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-xs-12">
+														<label for="filename">Descrição da Imagem</label>
+														<input type="text" class="form-control" id="filename" placeholder="Descrição da imagem">
+													</div>
+												</div>
+											</div>
+										</div><!-- /.box-body -->
+
+										<div class="box-footer">
+											<a class="btn btn-primary" href="#">Inserir imagem</a>
+										</div>
+									</form>
+								</div>
+							</div> <!-- /picture form -->
 							<div class="timeline-footer">
 							</div>
 						</div>

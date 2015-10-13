@@ -28,3 +28,4 @@ node_modules
 src/public/dist/*
 dist/
 src/public/vendors
+vendors/

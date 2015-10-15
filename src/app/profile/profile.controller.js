@@ -7,6 +7,8 @@
 
 	ProfileController.$inject = ['$scope', '$filter'];
 
+	// TODO: Separar o controller de perfil, para insercao
+	// e edicao, e detalhes do mesmo.
 	function ProfileController($scope, $filter) {
 		var vm = this;
 
@@ -17,6 +19,12 @@
 		vm.cultural_styles = [];
 		vm.experience_artistics = [];
 		vm.activeForm = '';
+		vm.formVideoMode = 'youtube';
+		vm.fileContent = null;
+		vm.imageContent = null;
+		vm.albumContent = null;
+		vm.audioContent = null;
+		vm.videoContent = null;
 
 		// Functions
 		vm.init = init;
@@ -24,7 +32,9 @@
 		vm.loadCulturalAreas = loadCulturalAreas;
 		vm.loadCulturalStyles = loadCulturalStyles;
 		vm.loadExperienceArtistics = loadExperienceArtistics;
-		vm.removeImageForm = removeImageForm();
+		vm.removeImageForm = removeImageForm;
+		vm.removeAlbumForm = removeAlbumForm;
+		vm.removeAudioForm = removeAudioForm;
 
 
 		function init() {
@@ -220,9 +230,16 @@
 		}
 
 		function removeImageForm() {
-			if(vm.profile.content !== undefined) {
-				vm.profile.content.image = null;
-			}
+			vm.imageContent = null;
+		}
+
+		function removeAlbumForm(image) {
+			// TODO: Remover imagem selecionada
+			vm.albumContent = null;
+		}
+
+		function removeAudioForm() {
+			vm.audioContent = null;
 		}
 	}
 })();

@@ -155,14 +155,14 @@
 										<div class="box-body">
 											<div class="form-group">
 												<div class="preview">
-													<img data-ngf-src="vm.profile.content.image" alt="Visualização da Imagem" class="image-preview">
-													<a class="btn btn-danger" href="#"
-														data-ng-show="vm.profile.content.image"
+													<img data-ngf-src="vm.imageContent" alt="Visualização da Imagem" class="image-preview">
+													<a class="btn btn-danger" href=""
+														data-ng-show="vm.imageContent"
 														data-ng-click="vm.removeImageForm()">Remover imagem</a>
 												</div>
-												<div data-ngf-drop data-ngf-select data-ng-model="vm.profile.content.image" class="drop-box"
+												<div data-ngf-drop data-ngf-select data-ng-model="vm.imageContent" class="drop-box"
 													data-ngf-drag-over-class="dragover" data-ngf-multiple="false" data-ngf-allow-dir="false"
-													accept="image/*" data-ngf-pattern="'image/*'" data-ng-hide="vm.profile.avatar">Arraste a imagem ou clique aqui para escolher</div>
+													accept="image/*" data-ngf-pattern="'image/*'">Arraste a imagem ou clique aqui para escolher</div>
 												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
 											</div>
 											<div class="form-group">
@@ -181,6 +181,152 @@
 									</form>
 								</div>
 							</div> <!-- /picture form -->
+
+							<!-- album form -->
+							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'album'">
+								<div class="panel-body">
+									<h3>Novo Álbum</h3>
+									<form role="form">
+										<div class="box-body">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-xs-10">
+														<label for="filename">Nome do Álbum</label>
+														<input type="text" class="form-control" id="filename" placeholder="Digite o nome do seu algum">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+											<div class="preview album col-md-3" data-ng-repeat="image in vm.albumContent">
+												<img data-ngf-thumbnail="!image.$error && image" alt="Visualização da Imagem" class="image-preview">
+												<a class="btn btn-danger btn-sm" href=""
+													data-ng-show="image"
+													data-ng-click="vm.removeImageAlbumForm(image)">Remover imagem</a>
+											</div>
+											</div>
+											<div class="form-group">
+												<div data-ngf-drop data-ngf-select data-ng-model="vm.albumContent" class="drop-box"
+													data-ngf-drag-over-class="dragover" data-ngf-multiple="true" data-ngf-allow-dir="true"
+													accept="image/*" data-ngf-pattern="'image/*'">Arraste a imagem ou clique aqui para escolher</div>
+												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
+											</div>
+										</div><!-- /.box-body -->
+
+										<div class="box-footer">
+											<a class="btn btn-primary" href="#">Inserir álbum</a>
+										</div>
+									</form>
+								</div>
+							</div> <!-- /album form -->
+
+							<!-- audio form -->
+							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'audio'">
+								<div class="panel-body">
+									<h3>Novo Áudio</h3>
+									<form role="form">
+										<div class="box-body">
+											<div class="row">
+											<div class="preview col-md-4">
+												<audio class="audio-preview" controls data-ngf-src="!vm.audioContent.$error && vm.audioContent"></audio>
+												<a class="btn btn-danger" href=""
+													data-ng-show="vm.audioContent"
+													data-ng-click="vm.removeAudioForm()">Remover áudio</a>
+											</div>
+											</div>
+											<div class="form-group">
+												<div data-ngf-drop data-ngf-select data-ng-model="vm.audioContent" class="drop-box"
+													data-ngf-drag-over-class="dragover" data-ngf-multiple="false" data-ngf-allow-dir="false"
+													accept="audio/*" data-ngf-pattern="'audio/*'">Arraste o áudio ou clique aqui para escolher</div>
+												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-xs-12">
+														<label for="filename">Descrição do Áudio</label>
+														<input type="text" class="form-control" id="filename" placeholder="Descrição do áudio">
+													</div>
+												</div>
+											</div>
+										</div><!-- /.box-body -->
+
+										<div class="box-footer">
+											<a class="btn btn-primary" href="#">Inserir áudio</a>
+										</div>
+									</form>
+								</div>
+							</div> <!-- /audio form -->
+
+							<!-- video form -->
+							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'video'">
+								<div class="panel-body">
+									<h3>Novo Video</h3>
+									<form role="form">
+										<div class="box-body">
+											<div class="form-group">
+												<label class="radio-inline">
+													<input type="radio" name="videoOptions" data-ng-model="vm.formVideoMode" value="youtube" checked> Youtube
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="videoOptions" data-ng-model="vm.formVideoMode" value="vimeo"> Vimeo
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="videoOptions" data-ng-model="vm.formVideoMode" value="file"> Arquivo de Vídeo
+												</label>
+											</div>
+											<div class="youtube_form" data-ng-show="vm.formVideoMode == 'youtube'">
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-12">
+															<label for="filename">Endereço do Vídeo</label>
+															<input type="url" class="form-control" id="filename" placeholder="Digite a URL do vídeo do Youtube">
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="vimeo_form" data-ng-show="vm.formVideoMode == 'vimeo'">
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-12">
+															<label for="filename">Endereço do Vídeo</label>
+															<input type="url" class="form-control" id="filename" placeholder="Digite a URL do vídeo do Vimeo">
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<div class="videofile_form" data-ng-show="vm.formVideoMode == 'file'">
+											<div class="row">
+												<div class="preview col-md-4">
+													<video data-ng-show="vm.videoContent" class="video-preview" controls data-ngf-src="!vm.videoContent.$error && vm.videoContent"></video>
+													<a class="btn btn-danger" href=""
+														data-ng-show="vm.videoContent"
+														data-ng-click="vm.removeVideoForm()">Remover vídeo</a>
+												</div>
+											</div>
+											<div class="form-group">
+												<div data-ngf-drop data-ngf-select data-ng-model="vm.videoContent" class="drop-box"
+													data-ngf-drag-over-class="dragover" data-ngf-multiple="false" data-ngf-allow-dir="false"
+													accept="video/*" data-ngf-pattern="'video/*'">Arraste o vídeo ou clique aqui para escolher</div>
+												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-xs-12">
+														<label for="filename">Descrição do Video</label>
+														<input type="text" class="form-control" id="filename" placeholder="Descrição do video">
+													</div>
+												</div>
+											</div>
+											</div>
+										</div><!-- /.box-body -->
+
+										<div class="box-footer">
+											<a class="btn btn-primary" href="#">Inserir Vídeo</a>
+										</div>
+									</form>
+								</div>
+							</div> <!-- /video form -->
+
 							<div class="timeline-footer">
 							</div>
 						</div>

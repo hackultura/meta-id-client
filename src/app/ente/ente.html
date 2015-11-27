@@ -84,16 +84,12 @@
 
 	<div class="register-box-body" data-ng-show="vm.artisticStep">
 		<form action="../../index.html" method="post">
-			<div class="form-group has-feedback">
-				<input type="text" class="form-control" placeholder="Nome Artístico">
-				<span class="glyphicon glyphicon-user form-control-feedback"></span>
-			</div>
 			<div class="form-group">
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label">Atuação Cultural</label>
-							<select class="form-control">
+							<select class="form-control" data-ng-model="vm.classification.atuacao">
 								<option>Selecione</option>
 								<option>2</option>
 								<option>3</option>
@@ -105,7 +101,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label">Área Artística</label>
-							<select class="form-control">
+							<select class="form-control" data-ng-model="vm.classification.area">
 								<option>Selecione</option>
 								<option>2</option>
 								<option>3</option>
@@ -121,7 +117,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label">Estilo Artístico</label>
-							<select class="form-control">
+							<select class="form-control" data-ng-model="vm.classification.estilo">
 								<option>Selecione</option>
 								<option>2</option>
 								<option>3</option>
@@ -133,7 +129,7 @@
 					<div class="col-xs-6">
 						<div class="form-group">
 							<label class="control-label">Tempo de Experiência</label>
-							<select class="form-control">
+							<select class="form-control" data-ng-model="vm.classification.experiencia">
 								<option>Selecione</option>
 								<option>2</option>
 								<option>3</option>
@@ -141,6 +137,41 @@
 								<option>5</option>
 							</select>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-5">
+						<a class="btn btn-success" href data-ng-click="vm.addClassification()">Adicionar Dados Artísticos</a>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12">
+						<table class="table table-bordered" data-ng-show="vm.listClassifications.length !== 0">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>Atuação Cultural</th>
+									<th>Área Artística</th>
+									<th>Estilo Artístico</th>
+									<th>Tempo de Experiência</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="classification in vm.listClassifications">
+									<td>
+										<a class="btn btn-xs" href="#">Remover</a>
+									</td>
+									<td>Teste</td>
+									<td>Teste</td>
+									<td>Teste</td>
+									<td>Teste</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

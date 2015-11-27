@@ -143,7 +143,9 @@ gulp.task('jshint', function () {
 
 gulp.task('webserver', function() {
   gulp.src(paths.dist.root)
-    .pipe(webserver());
+  .pipe(webserver({
+	port: 5000
+  }));
 });
 
 gulp.task('build', ['clean', 'less', 'usemin', 'usemin:fonts', 'imagemin', 'html', 'html:pages']);

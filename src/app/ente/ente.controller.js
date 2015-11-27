@@ -13,10 +13,14 @@
 		//Variables
 		vm.basicStep = true;
 		vm.artisticStep = false;
+		vm.ente = {};
+		vm.classification = {};
+		vm.listClassifications = [];
 
 		// Functions
 		vm.goEnteBasicForm = goEnteBasicForm;
 		vm.goEnteArtisticForm = goEnteArtisticForm;
+		vm.addClassification = addClassification;
 
 		function goEnteBasicForm() {
 			vm.artisticStep = false;
@@ -26,6 +30,11 @@
 		function goEnteArtisticForm() {
 			vm.basicStep = false;
 			vm.artisticStep = true;
+		};
+
+		function addClassification() {
+			vm.listClassifications.push(vm.classification);
+			vm.classification = {};
 		};
 	}
 })();

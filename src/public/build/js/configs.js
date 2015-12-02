@@ -18,4 +18,8 @@ setTimeout(function() {
  */
 setTimeout(function() {
 	$(":input").inputmask();
+	$(".cep").inputmask("99999-999");
+	$(".phone").inputmask("(99) 9{4,5}-9999");
+	$(".birth").inputmask("99/99/9999");
+	$(".cpf").inputmask("999.999.999-99");
 }, 2000);

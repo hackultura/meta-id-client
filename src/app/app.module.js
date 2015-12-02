@@ -5,8 +5,10 @@
 		.module('metaIdApp', [
 			'ui.router',
 			'xeditable',
-			'ngFileUpload'
+			'ngFileUpload',
+			'angular-intro'
 		])
+		.constant("API_URI_PREFIX", "http://localhost:8000/api/v1")
 		.config(routeConfig)
 		.run(runConfig);
 
@@ -26,7 +28,7 @@
 					'@': {
 						templateUrl: 'pages/layouts/admin.html'
 					},
-					'header@admin': {templateUrl: 'pages/header.html'},
+					'header@admin': {templateUrl: 'pages/header.html', controller: 'HeaderController'},
 					'sidebar@admin': {templateUrl: 'pages/sidebar.html'},
 					'main@admin':  {templateUrl: 'pages/main.html'}
 				},

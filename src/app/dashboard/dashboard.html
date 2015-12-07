@@ -1,6 +1,10 @@
+<div data-ng-controller="DashboardController as vm" data-ng-init="vm.init()">
 <!-- Content Header (Page header) -->
-<section class="content-header">
-	<h1></h1>
+<section class="content-header" data-ng-intro-options="vm.introOptions", data-ng-intro-method="vm.startTour">
+	<h1>Painel Principal
+		<i class="fa fa-question-circle help" data-toggle="popover" data-trigger="hover"
+			data-content="Clique no ícone para saber mais das funções dessa página" data-ng-click="vm.startTour()"></i>
+	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li class="active">Painel Principal</li>
@@ -8,14 +12,9 @@
 </section>
 
 <!-- Main content -->
-<section class="content" data-ng-controller="DashboardController as vm" data-ng-init="vm.init()">
+<section class="content">
 	<!-- Small boxes (Stat box) -->
 	<div class="row" data-ng-intro-options="vm.introOptions", data-ng-intro-method="vm.startTour">
-
-		<div class="col-md-10">
-			<p class="alert alert-warning">Bem vindo ao Meta ID. Caso queria conhecer mais sobre o seu painel <a href data-ng-click="vm.startTour()"><strong>clique aqui</strong>.</a></p>
-		</div>
-
 		<div class="col-md-9">
 			<!-- Widget: user widget style 1 -->
 			<div class="box box-widget widget-user-2">
@@ -46,3 +45,4 @@
 		</div><!-- ./col -->
 	</div><!-- /.row -->
 </section><!-- /.content -->
+</div>

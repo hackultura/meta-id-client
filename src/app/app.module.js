@@ -6,6 +6,7 @@
 			'ui.router',
 			'xeditable',
 			'ngFileUpload',
+			'naif.base64',
 			'angular-intro'
 		])
 		.constant("API_URI_PREFIX", "http://localhost:8000/api/v1")

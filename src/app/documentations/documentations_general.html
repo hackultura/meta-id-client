@@ -1,4 +1,4 @@
-<div data-ng-controller="DocumentationController as vm">
+<div data-ng-controller="DocumentationController as vm" data-ng-init="vm.init()">
 <!-- Content Header (Page header) -->
 <section class="content-header" data-ng-intro-options="vm.introOptions", data-ng-intro-method="vm.startTour">
 	<h1>Documentações Gerais
@@ -59,9 +59,9 @@
 				<!-- Add the bg color to the header using any of the bg-* classes -->
 				<div class="widget-user-header">
 					<div class="widget-doc-image">
-						<img src="img/user2-160x160.jpg" alt="User Avatar">
+						<img src="img/document.png" alt="User Avatar">
 					</div><!-- /.widget-doc-image -->
-					<a href="#">
+					<a href="{{ documentation.arquivo }}" target="_blank">
 						<h4 class="widget-documentation">{{ documentation.nome }}</h4>
 					</a>
 					<h5 class="widget-documentation-desc"><strong>Vence em:</strong> {{ documentation.vencimento  }}</h5>

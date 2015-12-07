@@ -13,6 +13,7 @@
 		vm.documentations = [];
 
 		var service = {
+			getDocumentations: getDocumentations,
 			createDocumentation: createDocumentation
 		};
 
@@ -25,7 +26,7 @@
 		};
 
 		function getDocumentations(ente) {
-			return $http({method: 'GET', url: API_URI_PREFIX + '/documentos/' + ente.id_pub});
+			return $http({method: 'GET', url: API_URI_PREFIX + '/documentos/entes/' + ente.id_pub});
 		};
 	}
 })();

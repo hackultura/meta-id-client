@@ -11,6 +11,7 @@
 		var vm = this;
 
 		//Variables
+		vm.ente = {};
 		vm.documento = {};
 		vm.documentations = [];
 		vm.introOptions = {
@@ -43,9 +44,21 @@
 
 		// Functions
 		vm.init = init;
+		vm.listDocumentations = listDocumentations;
 		vm.createDocumentation = createDocumentation;
 
-		function init() {};
+		function init() {
+			vm.ente = EnteService.getEnte();
+			vm.listDocumentations();
+		};
+
+		function listDocumentations() {
+			DocumentationsService.getDocumentations(vm.ente).then(function(response){
+				vm.documentations = response.data;
+			}, function(responseError){
+				vm.errors = responseError.data;
+			});
+		};
 
 		function createDocumentation() {
 			// Associando documento ao usuario
@@ -60,7 +73,6 @@
 				}
 			}, function(responseError) {
 				vm.errors = responseError.data;
-				console.log(responseError.data);
 			}, function(event) {
 				var progressPercentage = parseInt(100.0 * event.loaded / event.total);
 				vm.documento.progress = progressPercentage;

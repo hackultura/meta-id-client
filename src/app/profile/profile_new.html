@@ -15,6 +15,7 @@
 <section class="content" data-ng-controller="ProfileController as vm" data-ng-init="vm.init()">
 	<div class="row">
 		<div class="row">
+			<p data-ng-repeat="(name, errs) in vm.errors" class="alert alert-danger"><strong>Erro! </strong>: {{ errs.join(', ') }}</p>
 			<div class="col-md-9">
 				<!-- Widget: user widget style 1 -->
 				<div class="box box-widget widget-user-2">
@@ -27,48 +28,22 @@
 							<img class="img-circle" data-ngf-select data-ng-model="vm.profile.avatar" data-ngf-src="vm.profile.avatar" alt="Imagem de Perfil">
 							<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
 						</div><!-- /.widget-user-image -->
-						<h3 class="widget-profile-name"><a href="#" data-editable-text="vm.profile.name">{{ vm.profile.name || "Digite nome do seu perfil" }}</a></h3>
+						<h3 class="widget-profile-name"><a href="#" data-editable-text="vm.profile.nome">{{ vm.profile.nome || "Digite nome do seu perfil" }}</a></h3>
 						<div class="widget-profile-header">
-							<div class="row">
-								<div class="col-md-6">
-									<strong>Atividade Cultural:</strong>
-									<p><a href="#" data-editable-select="vm.profile.cultural_activity"
-											onshow="vm.loadCulturalActivities()" data-e-ng-options="g.id as g.activity for g in vm.cultural_activities">
-											{{ vm.profile.culturalActivityName || "Selecione sua Atividade Cultural" }}
-									</a></p>
-								</div>
-								<div class="col-md-5">
-									<strong>Área Artística:</strong>
-									<p><a href="#" data-editable-select="vm.profile.cultural_area"
-											onshow="vm.loadCulturalAreas()" data-e-ng-options="g.id as g.area for g in vm.cultural_areas">
-											{{ vm.profile.culturalAreaName || "Selecione sua Área Artística" }}
-									</a></p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<strong>Estilo Artístico:</strong>
-									<p><a href="#" data-editable-select="vm.profile.cultural_style"
-											onshow="vm.loadCulturalStyles()" data-e-ng-options="g.id as g.style for g in vm.cultural_styles">
-											{{ vm.profile.culturalStyleName || "Selecione seu Estilo Artístico" }}
-									</a></p>
-								</div>
-								<div class="col-md-4">
-									<strong>Tempo de Experiência: </strong>
-									<p><a href="#" data-editable-select="vm.profile.experience_artistic"
-											onshow="vm.loadExperienceArtistics()" data-e-ng-options="g.experience as g.experience_text for g in vm.experience_artistics">
-											{{ vm.profile.experienceArtisticName || "Selecione seu Tempo de Experiência" }}
-									</a></p>
-								</div>
-							</div>
 							<div class="row">
 								<div class="col-md-11">
 									<strong>Breve Histórico: </strong>
 									<p>
-										<a href="#" data-editable-textarea="vm.profile.history" data-e-rows="7" data-e-cols="60">
-											<pre class="textarea">{{ vm.profile.history || "Escreva o seu histórico" }}</pre>
+										<a href="#" data-editable-textarea="vm.profile.historico" data-e-rows="7" data-e-cols="60">
+											<pre class="textarea">{{ vm.profile.historico || "Escreva o seu histórico" }}</pre>
 										</a>
 									</p>
+								</div>
+							</div>
+							<div class="row align-right">
+								<div class="col-md-12">
+									<a class="btn btn-success" href data-ng-click="vm.saveProfile()" data-ng-hide="vm.portfolioBox">Inserir arquivos para o meu portfólio</a>
+									<a class="btn btn-success" href data-ng-click="vm.updateProfile()" data-ng-show="vm.portfolioBox">Atualizar meu perfil</a>
 								</div>
 							</div>
 						</div>
@@ -76,7 +51,7 @@
 				</div><!-- /.widget-user -->
 			</div>
 		</div>
-		<div class="row" style="padding-left: 21px;">
+		<div class="row" style="padding-left: 21px;" data-ng-show="vm.portfolioBox">
 			<div class="col-md-12">
 				<!-- The time line -->
 				<ul class="timeline">
@@ -90,9 +65,6 @@
 								</a>
 								<a class="btn btn-app" data-ng-click="vm.activeForm = 'picture'" data-ng-class="{arrow_box: vm.activeForm == 'picture'}">
 									<i class="fa fa-image"></i> Imagem
-								</a>
-								<a class="btn btn-app" data-ng-click="vm.activeForm = 'album'" data-ng-class="{arrow_box: vm.activeForm == 'album'}">
-									<i class="fa fa-th-large"></i> Álbum
 								</a>
 								<a class="btn btn-app" data-ng-click="vm.activeForm = 'audio'" data-ng-class="{arrow_box: vm.activeForm == 'audio'}">
 									<i class="fa fa-music"></i> Áudio
@@ -109,26 +81,9 @@
 										<div class="box-body">
 											<div class="form-group">
 												<div class="row">
-													<div class="col-xs-5">
+													<div class="col-xs-12">
 														<label for="filename">Nome do Arquivo</label>
 														<input type="text" class="form-control" id="filename" placeholder="Nome do Arquivo">
-													</div>
-													<div class="col-xs-5">
-														<label for="exampleInputName2">Tipo de Documento</label>
-														<select class="form-control">
-															<option>Documento de Identificação (CNH / CI / RG)</option>
-															<option>Carteira de Habilitação</option>
-															<option>Certidão de Nascimento</option>
-														</select>
-													</div>
-													<div class="col-xs-2">
-														<label>Vence em:</label>
-														<div class="input-group">
-															<div class="input-group-addon">
-																<i class="fa fa-calendar"></i>
-															</div>
-															<input type="text" class="form-control" data-inputmask="'mask': '99/99/9999'">
-														</div><!-- /.input group -->
 													</div>
 												</div>
 											</div>
@@ -181,43 +136,6 @@
 									</form>
 								</div>
 							</div> <!-- /picture form -->
-
-							<!-- album form -->
-							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'album'">
-								<div class="panel-body">
-									<h3>Novo Álbum</h3>
-									<form role="form">
-										<div class="box-body">
-											<div class="form-group">
-												<div class="row">
-													<div class="col-xs-10">
-														<label for="filename">Nome do Álbum</label>
-														<input type="text" class="form-control" id="filename" placeholder="Digite o nome do seu algum">
-													</div>
-												</div>
-											</div>
-											<div class="row">
-											<div class="preview album col-md-3" data-ng-repeat="image in vm.albumContent">
-												<img data-ngf-thumbnail="!image.$error && image" alt="Visualização da Imagem" class="image-preview">
-												<a class="btn btn-danger btn-sm" href=""
-													data-ng-show="image"
-													data-ng-click="vm.removeImageAlbumForm(image)">Remover imagem</a>
-											</div>
-											</div>
-											<div class="form-group">
-												<div data-ngf-drop data-ngf-select data-ng-model="vm.albumContent" class="drop-box"
-													data-ngf-drag-over-class="dragover" data-ngf-multiple="true" data-ngf-allow-dir="true"
-													accept="image/*" data-ngf-pattern="'image/*'">Arraste a imagem ou clique aqui para escolher</div>
-												<div ngf-no-file-drop>Esse browser não suporta arrastar/soltar arquivos.</div>
-											</div>
-										</div><!-- /.box-body -->
-
-										<div class="box-footer">
-											<a class="btn btn-primary" href="#">Inserir álbum</a>
-										</div>
-									</form>
-								</div>
-							</div> <!-- /album form -->
 
 							<!-- audio form -->
 							<div class="panel panel-default timeline-panel" data-ng-show="vm.activeForm == 'audio'">
@@ -329,20 +247,6 @@
 
 							<div class="timeline-footer">
 							</div>
-						</div>
-					</li>
-					<li>
-						<i class="fa fa-file bg-green"></i>
-						<div class="timeline-item">
-							<h3 class="timeline-header">Inserir Arquivo</h3>
-							<div class="timeline-body"></div>
-						</div>
-					</li>
-					<li>
-						<i class="fa fa-image bg-blue"></i>
-						<div class="timeline-item">
-							<h3 class="timeline-header">Inserir Imagem</h3>
-							<div class="timeline-body"></div>
 						</div>
 					</li>
 				</ul>
